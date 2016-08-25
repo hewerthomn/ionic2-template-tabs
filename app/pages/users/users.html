@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Users
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-list-header>All users</ion-list-header>
+      <a ion-item detail-push text-wrap *ngFor="let user of users" (click)="showUser(user.id)">
+        <ion-avatar item-left>
+          <img [src]="'img/noavatar.jpg'" alt="">
+        </ion-avatar>
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.username }}</p>
+      </a>
+    </ion-list>
+  </ion-card>
+</ion-content>

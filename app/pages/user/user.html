@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      User #{{ user?.id }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="user != null">
+    <ion-card>
+      <ion-item text-wrap>
+        <h1>{{ user.name }}</h1>
+        <h2>{{ user.username }}</h2>
+      </ion-item>
+    </ion-card>
+
+    <ion-segment padding-horizontal [(ngModel)]="activeSegment">
+      <ion-segment-button value="info">
+        Information
+      </ion-segment-button>
+      <ion-segment-button value="albums">
+        Albums
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="activeSegment">
+      <div *ngSwitchCase="'info'">
+        <ion-card>
+          <ion-list>
+            <ion-list-header>
+              Contact
+            </ion-list-header>
+            <a ion-item [href]="sanitize('tel:' + user.phone)">
+              <ion-icon name="call" item-left></ion-icon>
+              {{ user.phone }}
+            </a>
+            <a ion-item [href]="sanitize('mailto:' + user.email)">
+              <ion-icon name="mail" item-left></ion-icon>
+              {{ user.email }}
+            </a>
+          </ion-list>
+        </ion-card>
+
+        <ion-card>
+          <ion-list>
+            <ion-list-header>
+              Address
+            </ion-list-header>
+            <ion-item text-wrap>
+              <h2>
+                {{ user.address.street }}
+                {{ user.address.suite }}
+              </h2>
+              <h3>
+                {{ user.address.city }} - Zipcode {{ user.address.zipcode }}
+              </h3>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+
+      <div *ngSwitchCase="'albums'">
+        <ion-card>
+          <ion-list>
+            <ion-list-header>
+              Albums
+            </ion-list-header>
+            <ion-item text-wrap *ngFor="let album of albums" (click)="showAlbum(album)">
+              <h2>{{ album.title }}</h2>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

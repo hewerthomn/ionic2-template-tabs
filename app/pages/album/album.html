@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Album
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item text-wrap>
+      <h1>{{ user.name }}</h1>
+      <h2>{{ user.username }}</h2>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-list-header text-wrap>
+        {{ album.title }}
+      </ion-list-header>
+
+      <ion-item text-wrap *ngFor="let photo of photos" (click)="showPhoto(photo)">
+        <ion-thumbnail item-left>
+          <img [src]="photo.thumbnailUrl" alt="">
+        </ion-thumbnail>
+        {{ photo.title }}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
